@@ -8,7 +8,7 @@ public static class Roll
 
 	public static int Next()
 	{
-		var value = random.Next(0, 100);
+		var value = random.Next(0, 20);
 		return value;
 	}
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Collections.Generic;
-// ^ задачки
+
 namespace MyProject2
 {
     internal class Program
@@ -19,6 +19,7 @@ namespace MyProject2
                 return;
             
             var character = Select();
+           
             Game(character);
             Console.WriteLine();
         }
@@ -54,20 +55,20 @@ namespace MyProject2
 
                 if (selects == 1)
                 {
-                    var caharter = new Character { Name = "OrcWarrior", Health = 100 };
-                    Console.WriteLine($"Ваш выбор могучий орк воин, который имеет здоровья: {caharter.Health}");
+                    var caharter = new Character { Name = "OrcWarrior", Health = 1000, Strange = 25, Dextery = 10,Wisdom = 5, Armor = 15 };
+                    Console.WriteLine($"Ваш выбор могучий орк воин, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
                 }
                 if (selects == 2)
                 {
-                    var caharter = new Character { Name = "HumanWizard", Health = 20 };
-                    Console.WriteLine($"Ваш выбор мудрый волшебник, который имеет здоровья: {caharter.Health}");
+                    var caharter = new Character { Name = "HumanWizard", Health = 200, Strange = 5, Dextery = 5,Wisdom = 25, Armor = 5 };
+                    Console.WriteLine($"Ваш выбор мудрый волшебник, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
                 }
                 if (selects == 3)
                 {
-                    var caharter = new Character { Name = "ElfRogue", Health = 50 };
-                    Console.WriteLine($"Ваш выбор могучий ловкий плут, который имеет здоровья: {caharter.Health}");
+                    var caharter = new Character { Name = "ElfRogue", Health = 500, Strange = 10, Dextery = 25, Wisdom = 10, Armor = 10 };
+                    Console.WriteLine($"Ваш выбор могучий ловкий плут, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
                 }
 
@@ -118,20 +119,61 @@ namespace MyProject2
                 hero.Waepon = waepon[take];
             }
 
-            Console.WriteLine($"Вы выбрали ({hero.Waepon})");
+            
             Console.WriteLine("Взяв свое первое оружие вы  вы слышите шум позади себя\nНА ВАС НАПАЛ МОНСТР, ЗАЩИЩАЙТЕСЬ! ");
 
-            FightOrc(hero);
+            Fight(hero);
         }
 
-        static void FightOrc(Character hero)
+        static void Fight(Character hero)
         {
-            var Monster = 100;
-            var hits = Roll.Next();
-            hero.Damage(hits);
+           
+            var rolls = Roll.Next();
+            var hit = Roll.Next();
+            Console.WriteLine("Что-бы победить монстра, вам нужно бросить игральные кости два раза.");
+            Console.WriteLine("У каждого монстра имеется броня, поэтому первый бросок должен дать в сумму равную броне или выше");
+            Console.WriteLine("А вторрой бросок сумма урона");
+            Console.WriteLine("Вы готовы бросить кости ?");
+            Console.WriteLine($"Ваши действия : \n 1) Бросить игральные кости."); ;
+            var Trolls = new Monsters { Name = "Fat Troll", Health = 800, Strange = 25, Dextery = 2, Wisdom = 1, Armor = 10 };
             
-            Console.WriteLine($"Монстр бьет вас уроном в размере {hits} у вас остается {hero.Health}");
-            Console.WriteLine("На данный момент все");
+            var action = int.Parse(Console.ReadLine());
+            
+
+                if (action == 1)
+                {
+                    Console.WriteLine($"Ваши кости выдали {rolls}");
+                    if (rolls > Trolls.Armor)
+                    {
+                        Console.WriteLine($"Вы пробили Жирного троля и нанесли ему {rolls} урона. Теперь у него ({Trolls.Health - hit}) здоровья");
+                    }
+                    else if (rolls < Trolls.Armor)
+                    {
+                        Console.WriteLine("Увы, вы не пробили Жирного троля");
+                    }
+                    Console.WriteLine("Троль дождался своей очереди и замахивается своим топором");
+                    if (rolls > hero.Armor)
+                    {
+                        Console.WriteLine($"Монстер пробил вас и оставил вам ( {hero.Health - hit}) здоровья");
+                    }
+                    else if (rolls < hero.Armor)
+                    {
+                        Console.WriteLine("Поздравляю, вас не пробили");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Вам нужно бросить кости");
+                }
+           
+           /// 
+        }
+
+        static Monsters Monster(Monsters Troll)
+        {
+            var Trolls = new Monsters { Name = "Fat Troll", Health = 800, Strange = 25, Dextery = 2, Wisdom = 1, Armor = 10 };
+            return Trolls;
         }
     }
 }

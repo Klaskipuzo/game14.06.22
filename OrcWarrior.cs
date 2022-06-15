@@ -8,10 +8,14 @@ public class Character
 	{
 		"Больно!", "Кажется это кровь("
 	};
-	private string DieReplic = "Постойте зиккурат...";
+	private string DieReplic = "Отомсти за меня...";
 	public string Name;
 	public int Health;
+	public int Strange;
+	public int Dextery;
+	public int Wisdom;
 	public string Waepon;
+	public int Armor;
 
 	public void Damage(int damage)
 	{
@@ -26,3 +30,31 @@ public class Character
 		}
 	}
 }
+
+public class Monsters
+{
+	public string Name;
+	public int Health;
+	public int Strange;
+	public int Dextery;
+	public int Wisdom;
+	public int Armor;
+		private string[] AuchReplics = new[]
+	{
+		"угрх"
+	};
+	private string DieReplic = "Вы все умрете!";
+	public void Damage(int damage)
+	{
+		Health = Health - damage;
+		if (Health > 0)
+		{
+			Console.WriteLine(AuchReplics[0]);
+		}
+		else
+		{
+			Console.WriteLine(DieReplic);
+		}
+	}
+}
+
