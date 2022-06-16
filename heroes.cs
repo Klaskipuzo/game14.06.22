@@ -16,6 +16,17 @@ public class Character
 	public int Wisdom;
 	public string Waepon;
 	public int Armor;
+	//ORC
+	public string Torch;
+	public int Throw;
+	//HUMAN
+	public int Fire_ball;
+	public string Firefly;
+	public string Alohomora;
+	//ELF
+	public string Cat_s_eyes;
+	public string Breaking;
+
 
 	public void Damage(int damage)
 	{
@@ -31,30 +42,5 @@ public class Character
 	}
 }
 
-public class Monsters
-{
-	public string Name;
-	public int Health;
-	public int Strange;
-	public int Dextery;
-	public int Wisdom;
-	public int Armor;
-		private string[] AuchReplics = new[]
-	{
-		"угрх"
-	};
-	private string DieReplic = "Вы все умрете!";
-	public void Damage(int damage)
-	{
-		Health = Health - damage;
-		if (Health > 0)
-		{
-			Console.WriteLine(AuchReplics[0]);
-		}
-		else
-		{
-			Console.WriteLine(DieReplic);
-		}
-	}
-}
+
 

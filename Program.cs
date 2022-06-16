@@ -19,6 +19,7 @@ namespace MyProject2
                 return;
             
             var character = Select();
+            
            
             Game(character);
             Console.WriteLine();
@@ -47,27 +48,30 @@ namespace MyProject2
         
         static Character Select()
         {
+            
             Console.WriteLine("Вы готовы сделать свой выбор?");
             while (true)
             {
                 Console.WriteLine("1 - OrcWarrior \n2 - HumanWizard \n3 - ElfRogue");
                 var selects = int.Parse(Console.ReadLine());
-
+                
                 if (selects == 1)
                 {
-                    var caharter = new Character { Name = "OrcWarrior", Health = 1000, Strange = 25, Dextery = 10,Wisdom = 5, Armor = 15 };
+                    var caharter = new Character { Name = "OrcWarrior", Health = 1000, Strange = 25, Dextery = 10,Wisdom = 5, Armor = 15, Throw = 50 , Torch = "Способность зажечь факел и осветить путь" };
                     Console.WriteLine($"Ваш выбор могучий орк воин, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
+                    
+                    
                 }
                 if (selects == 2)
                 {
-                    var caharter = new Character { Name = "HumanWizard", Health = 200, Strange = 5, Dextery = 5,Wisdom = 25, Armor = 5 };
+                    var caharter = new Character { Name = "HumanWizard", Health = 200, Strange = 5, Dextery = 5,Wisdom = 25, Armor = 5, Fire_ball = 100, Firefly = "Вазвать волшебного светлячка который осветит вам путь", Alohomora = "Вскроет любой замок" };
                     Console.WriteLine($"Ваш выбор мудрый волшебник, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
                 }
                 if (selects == 3)
                 {
-                    var caharter = new Character { Name = "ElfRogue", Health = 500, Strange = 10, Dextery = 25, Wisdom = 10, Armor = 10 };
+                    var caharter = new Character { Name = "ElfRogue", Health = 500, Strange = 10, Dextery = 25, Wisdom = 10, Armor = 10, Cat_s_eyes = "Использовать кошачьи глаза для ночого зрения", Breaking = "Вскрыть любой замок"};
                     Console.WriteLine($"Ваш выбор могучий ловкий плут, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
                 }
@@ -79,10 +83,12 @@ namespace MyProject2
         static void Game(Character hero)
         {
             Console.WriteLine($"\nВы оказались в тёмной комнате, сквозь темноту видно дверь и рядом стоящий сундук.\nВаши дейтвия?");
+            
+
 
             while (true)
             {
-                Console.WriteLine($"Выберите действия:\n1 - Открыть сундук\n2 - открыть дверь\n3 - Зажечь факел");
+                Console.WriteLine($"Выберите действия:\n1 - Открыть сундук\n2 - открыть дверь\n3 - Использовать свособность освещения");
                 var select = int.Parse(Console.ReadLine());
                 if (select == 1)
                 {
@@ -96,7 +102,8 @@ namespace MyProject2
                 }
                 if (select == 3)
                 {
-                    Console.WriteLine("Вы зажгли факел и увидели ловушку на двери и на сундуке. При хорошем освещении вы избавились от ловушек и открыли сундук");
+                    if(hero)
+                    
                     Chess(hero);
                     return;
                 }
@@ -124,28 +131,30 @@ namespace MyProject2
 
             Fight(hero);
         }
-
+        /// <summary>
+        /// Метод боя
+        /// </summary>
+        /// <param name="hero"></param>
         static void Fight(Character hero)
         {
-           
+
             var rolls = Roll.Next();
             var hit = Roll.Next();
             Console.WriteLine("Что-бы победить монстра, вам нужно бросить игральные кости два раза.");
             Console.WriteLine("У каждого монстра имеется броня, поэтому первый бросок должен дать в сумму равную броне или выше");
             Console.WriteLine("А вторрой бросок сумма урона");
             Console.WriteLine("Вы готовы бросить кости ?");
-            Console.WriteLine($"Ваши действия : \n 1) Бросить игральные кости."); ;
+            Console.WriteLine($"Ваши действия : \n 1) Бросить игральные кости.");
             var Trolls = new Monsters { Name = "Fat Troll", Health = 800, Strange = 25, Dextery = 2, Wisdom = 1, Armor = 10 };
-            
+
             var action = int.Parse(Console.ReadLine());
             
-
                 if (action == 1)
                 {
                     Console.WriteLine($"Ваши кости выдали {rolls}");
                     if (rolls > Trolls.Armor)
                     {
-                        Console.WriteLine($"Вы пробили Жирного троля и нанесли ему {rolls} урона. Теперь у него ({Trolls.Health - hit}) здоровья");
+                        Console.WriteLine($"Вы пробили Жирного троля и нанесли ему {hit} урона. Теперь у него ({Trolls.Health - hit}) здоровья");
                     }
                     else if (rolls < Trolls.Armor)
                     {
@@ -154,7 +163,7 @@ namespace MyProject2
                     Console.WriteLine("Троль дождался своей очереди и замахивается своим топором");
                     if (rolls > hero.Armor)
                     {
-                        Console.WriteLine($"Монстер пробил вас и оставил вам ( {hero.Health - hit}) здоровья");
+                        Console.WriteLine($"Тролль пробил вас и оставил вам ( {hero.Health - hit}) здоровья");
                     }
                     else if (rolls < hero.Armor)
                     {
@@ -162,12 +171,9 @@ namespace MyProject2
                     }
 
                 }
-                else
-                {
-                    Console.WriteLine("Вам нужно бросить кости");
-                }
-           
-           /// 
+                             
+                /// 
+            
         }
 
         static Monsters Monster(Monsters Troll)
