@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Collections.Generic;
 
+
 namespace MyProject2
 {
     internal class Program
@@ -23,6 +24,7 @@ namespace MyProject2
            
             Game(character);
             Console.WriteLine();
+            
         }
 
         static bool Start()
@@ -57,21 +59,27 @@ namespace MyProject2
                 
                 if (selects == 1)
                 {
-                    var caharter = new Character { Name = "OrcWarrior", Health = 1000, Strange = 25, Dextery = 10,Wisdom = 5, Armor = 15, Throw = 50 , Torch = "Способность зажечь факел и осветить путь" };
-                    Console.WriteLine($"Ваш выбор могучий орк воин, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
+                    Ability_Orc[] abilityOrc = new Ability_Orc[1];
+                    abilityOrc[0] = new Ability_Orc  ("Факел", "Бросить оружие в цель", "Сломать замок", "Смертельный удар");
+                    
+                        
+                    var caharter = new Character { Name = "OrcWarrior", Health = 1000, Strange = 25, Dextery = 10,Wisdom = 5, Armor = 15,Ability = Convert.ToString(abilityOrc) };
+                    Console.WriteLine($"Ваш выбор могучий орк воин, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}\n{caharter.Ability} ");
                     return caharter;
                     
                     
                 }
                 if (selects == 2)
                 {
-                    var caharter = new Character { Name = "HumanWizard", Health = 200, Strange = 5, Dextery = 5,Wisdom = 25, Armor = 5, Fire_ball = 100, Firefly = "Вазвать волшебного светлячка который осветит вам путь", Alohomora = "Вскроет любой замок" };
+
+                    var caharter = new Character { Name = "HumanWizard", Health = 200, Strange = 5, Dextery = 5,Wisdom = 25, Armor = 5};
                     Console.WriteLine($"Ваш выбор мудрый волшебник, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
                 }
                 if (selects == 3)
                 {
-                    var caharter = new Character { Name = "ElfRogue", Health = 500, Strange = 10, Dextery = 25, Wisdom = 10, Armor = 10, Cat_s_eyes = "Использовать кошачьи глаза для ночого зрения", Breaking = "Вскрыть любой замок"};
+
+                    var caharter = new Character { Name = "ElfRogue", Health = 500, Strange = 10, Dextery = 25, Wisdom = 10, Armor = 10};
                     Console.WriteLine($"Ваш выбор могучий ловкий плут, который имеет данные характеристики:\nЗдоровье - {caharter.Health}\nСила - {caharter.Strange}\nЛовкость - {caharter.Dextery}\nМудрость - {caharter.Wisdom}\nЗащита - {caharter.Armor}");
                     return caharter;
                 }
@@ -83,7 +91,10 @@ namespace MyProject2
         static void Game(Character hero)
         {
             Console.WriteLine($"\nВы оказались в тёмной комнате, сквозь темноту видно дверь и рядом стоящий сундук.\nВаши дейтвия?");
+            //добавить -------
             
+
+
 
 
             while (true)
@@ -102,7 +113,10 @@ namespace MyProject2
                 }
                 if (select == 3)
                 {
-                    if(hero)
+                   
+                    
+                    
+
                     
                     Chess(hero);
                     return;
@@ -131,6 +145,7 @@ namespace MyProject2
 
             Fight(hero);
         }
+        
         /// <summary>
         /// Метод боя
         /// </summary>
@@ -175,11 +190,15 @@ namespace MyProject2
                 /// 
             
         }
-
+        
+        
         static Monsters Monster(Monsters Troll)
         {
             var Trolls = new Monsters { Name = "Fat Troll", Health = 800, Strange = 25, Dextery = 2, Wisdom = 1, Armor = 10 };
             return Trolls;
         }
+
+        
     }
+
 }

@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MyProject2;
-
-public class Ability_Human_Wizard
-
+namespace MyProject2
 {
-	public string Name;
-	public string Fire_ball;
-	public string Firefly;
-	public string Alohomora;
-	
-
-
+    internal class Ability_Human
+    {
+        public string Fireball;
+        public string Firefly;
+        public string Alhamore;
+        
+    }
 }

@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyProject2
 {
-    internal class Ability_Elf
+    class PrintOrc
     {
-        public string Unlock;
-        public string Сat_vision;
-        public string Invisibility;
         
     }
 }
